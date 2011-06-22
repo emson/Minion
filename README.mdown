@@ -4,7 +4,14 @@ Welcome to Minion the framework for building mini Ruby applications.
 
 Mini applications or minions can be built that rely on services provided by the Minion gem. For example you could use the database and email service to create a simple app that reads a table of user account details and sends an email to each user.
 
-The idea is that each of these mini apps can be controlled from the Minion command-line commands and can be executed from a cron job.
+The idea is that each of these mini apps can be controlled from the Minion command-line and executed using a cron job.
+
+## Minion commands
+
+`init`<br/>
+Creates a `.minion` director in your home directory. This directory holds configuration information that your minions (mini apps) will use.
+
+
 
 
 

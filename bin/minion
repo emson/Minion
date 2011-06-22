@@ -2,10 +2,22 @@
 
 # Remember to make this file executable:
 # chmod +x bin/minion
+# Thor:  https://github.com/wycats/thor/wiki
+
+require 'rubygems'
+require 'thor'
 
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'minion'
 
-# TODO add command line app stuff here
-app = Minion::App.new
-app.start
+class MinionCommands < Thor
+  
+  desc "start", "Start minion"
+  def start
+    app = Minion::App.new
+    app.start
+  end
+  
+end
+
+MinionCommands.start
