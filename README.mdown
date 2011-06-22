@@ -8,8 +8,8 @@ The idea is that each of these mini apps can be controlled from the Minion comma
 
 ## Minion commands
 
-`init`<br/>
-Creates a `.minion` director in your home directory. This directory holds configuration information that your minions (mini apps) will use.
+`minion init`<br/>
+Creates a `.minion` directory in your home directory. This directory holds configuration information that your minions (mini apps) will use.
 
 
 
