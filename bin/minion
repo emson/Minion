@@ -10,14 +10,15 @@ require 'thor'
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'minion'
 
-class MinionCommands < Thor
+class MinionAppRunner < Thor
   
   desc "start", "Start minion"
   def start
-    app = Minion::App.new
+    app = Minion::Commands.new
     app.start
   end
   
 end
 
-MinionCommands.start
+# Thor command set up
+MinionAppRunner.start
