@@ -4,18 +4,35 @@
 # chmod +x bin/minion
 # Thor:  https://github.com/wycats/thor/wiki
 
-require 'rubygems'
-require 'thor'
+$LOAD_PATH << File.join(File.dirname(__FILE__), '../lib')
+$LOAD_PATH << File.join(File.dirname(__FILE__), '../')
 
-$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require 'config/boot'
+require 'thor'
 require 'minion'
 
 class MinionAppRunner < Thor
   
-  desc "start", "Start minion"
-  def start
-    app = Minion::Commands.new
-    app.start
+  no_tasks do
+    def app
+      @app ||= Minion::Commands.new
+    end
+  end
+  
+  desc "version", "Displays the version number"
+  def version
+    puts Minion::VERSION
+  end
+  
+  desc "init [minions_path]", "Initialises the Minion gem."
+  long_desc "init [minions_path], initialises the Minion gem with a default minions_path = ~/minions"
+  def init
+    app.init
+  end
+  
+  desc "add app_name", "Add a minion app to the default minions directory"
+  def add(app_name)
+    app.add app_name
   end
   
 end

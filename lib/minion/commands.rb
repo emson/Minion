@@ -1,3 +1,5 @@
+require 'fileutils'
+
 module Minion
   class Commands
     
@@ -5,12 +7,30 @@ module Minion
       @output = output
     end
     
-    def add(app)
-      puts "Adding application #{app}"
+    def init
+      output.puts "The minions have a new home"
+      FileUtils.mkdir_p("#{Dir.home}/minions")
     end
     
-    def start
-      @output.puts "Success welcome to the minion app"
+    def add(app)
+      if init_check?
+        FileUtils.mkdir("#{Dir.home}/minions/#{app}")
+        output.puts "Minion '#{app}' at your service master"
+      end
+    end
+    
+    private
+    
+    def init_check?
+      unless File.exists?("#{Dir.home}/minions")
+        output.puts "Please run 'minion init' first"
+        return false
+      end
+      true
+    end
+    
+    def output
+      @output
     end
     
   end
