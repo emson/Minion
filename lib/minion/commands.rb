@@ -14,7 +14,7 @@ module Minion
     
     def add(app)
       if init_check?
-        FileUtils.mkdir("#{Minion::MINIONS_PATH}/#{app}")
+        FileUtils.mkdir_p("#{Minion::MINIONS_PATH}/#{app}")
         output.puts "Minion '#{app}' at your service master"
       end
     end

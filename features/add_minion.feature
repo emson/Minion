@@ -11,10 +11,8 @@ Feature: User adds a minion app
 
   Scenario: Add an app
     Given I can now add a minion app
-		And I expect "~/minions/my_app" directory to be created
-		And I expect "~/minions/my_app/my_app_main.rb" file to be added
+	    And I expect to see "~/minions/my_app" created
+	    And I expect to see "~/minions/my_app/my_app_main.rb" file created
     When I type "minion add my_app"
     Then I should see "Minion 'my_app' at your service master"
-    And I expect to see "~/minions/my_app" created
-    And I expect to see "~/minions/my_app/my_app_main.rb" file created
-		And my expectations should be met
+			And my expectations should be met
