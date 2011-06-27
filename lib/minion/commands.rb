@@ -9,12 +9,12 @@ module Minion
     
     def init
       output.puts "The minions have a new home"
-      FileUtils.mkdir_p("#{Dir.home}/minions")
+      FileUtils.mkdir_p(Minion::MINIONS_PATH)
     end
     
     def add(app)
       if init_check?
-        FileUtils.mkdir("#{Dir.home}/minions/#{app}")
+        FileUtils.mkdir("#{Minion::MINIONS_PATH}/#{app}")
         output.puts "Minion '#{app}' at your service master"
       end
     end
@@ -22,7 +22,7 @@ module Minion
     private
     
     def init_check?
-      unless File.exists?("#{Dir.home}/minions")
+      unless File.exists?(Minion::MINIONS_PATH)
         output.puts "Please run 'minion init' first"
         return false
       end

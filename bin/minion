@@ -11,6 +11,7 @@ require 'config/boot'
 require 'thor'
 require 'minion'
 
+
 class MinionAppRunner < Thor
   
   no_tasks do

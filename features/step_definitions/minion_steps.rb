@@ -23,22 +23,18 @@ Given /^I have not run minion init$/ do
   File.stub(:exists?).and_return false
 end
 
-Given /^I have already run minion init$/ do
-  # File.stub(:exists?).with(File.expand_path('~/minions')).and_return true
-  # FileUtils.should_receive(:mkdir).with anything
+
+Given /^I can now add a minion app$/ do
+  File.stub(:exists?).with(File.expand_path(Minion::MINIONS_PATH)).and_return true
+  FileUtils.should_receive(:mkdir).with(File.expand_path("#{Minion::MINIONS_PATH}/my_app"))
+  File.should_receive(:open).with(File.expand_path("#{Minion::MINIONS_PATH}/my_app/my_app_main.rb", "w")).and_return true
 end
+
 
 Given /^this is the first time using the minion app$/ do
-  File.should_receive(:exists?).with(File.expand_path('~/minions')).and_return false
+  FileUtils.should_receive(:mkdir_p).with(File.expand_path("#{Minion::MINIONS_PATH}"))
 end
 
-Then /^I should see "([^"]*)" created$/ do |dir_path|
-  File.exists?(File.expand_path(dir_path)).should be_true
-end
-
-Then /^I should see "([^"]*)"$/ do |message|
-  output.messages.should include(message)
-end
 
 When /^I type "([^"]*)"$/ do |line_items|
   items = line_items.split
@@ -47,7 +43,21 @@ When /^I type "([^"]*)"$/ do |line_items|
   minion_commands.send(command.to_sym) unless param
 end
 
+
 Then /^I should see the error "([^"]*)"$/ do |message|
+  output.messages.should include(message)
+end
+
+
+Then /^I expect to see "([^"]*)" created$/ do |dir_path|
+end
+
+
+Then /^I expect to see "([^"]*)" file created$/ do |dir_path|
+end
+
+
+Then /^I should see "([^"]*)"$/ do |message|
   output.messages.should include(message)
 end
 

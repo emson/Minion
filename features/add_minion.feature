@@ -10,8 +10,11 @@ Feature: User adds a minion app
     Then I should see the error "Please run 'minion init' first"
 
   Scenario: Add an app
-    Given I have already run minion init
+    Given I can now add a minion app
+		And I expect "~/minions/my_app" directory to be created
+		And I expect "~/minions/my_app/my_app_main.rb" file to be added
     When I type "minion add my_app"
     Then I should see "Minion 'my_app' at your service master"
-    And I should see "~/minions/my_app" created
-    And I should see "~/minions/my_app/my_app_main.rb" created
+    And I expect to see "~/minions/my_app" created
+    And I expect to see "~/minions/my_app/my_app_main.rb" file created
+		And my expectations should be met
