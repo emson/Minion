@@ -13,7 +13,7 @@ Creates a `./minions` directory from where it is executed. This directory will h
 
 
 `minion add my_app_name`<br/>
-Creates a new app`./minions/my_app_name` directory. 
+Creates a new minion app`in the ./minions/my_app_name` directory. 
 
 
 
