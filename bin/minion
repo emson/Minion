@@ -25,8 +25,8 @@ class MinionAppRunner < Thor
     puts Minion::VERSION
   end
   
-  desc "init [minions_path]", "Initialises the Minion gem."
-  long_desc "init [minions_path], initialises the Minion gem with a default minions_path = ~/minions"
+  desc "init", "Initialises the Minion gem."
+  long_desc "init initialises the Minion gem with a default minions_path = ./minions"
   def init
     app.init
   end
