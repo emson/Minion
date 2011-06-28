@@ -9,8 +9,11 @@ The idea is that each of these mini apps can be controlled from the Minion comma
 ## Minion commands
 
 `minion init`<br/>
-Creates a `.minion` directory in your home directory. This directory holds configuration information that your minions (mini apps) will use.
+Creates a `./minions` directory from where it is executed. This directory will hold your minions (mini apps).
 
+
+`minion add my_app_name`<br/>
+Creates a new app`./minions/my_app_name` directory. 
 
 
 

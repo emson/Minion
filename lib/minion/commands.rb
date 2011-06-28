@@ -15,6 +15,7 @@ module Minion
     def add(app)
       if init_check?
         FileUtils.mkdir_p("#{Minion::MINIONS_PATH}/#{app}")
+        File.open("#{Minion::MINIONS_PATH}/#{app}/#{app}_main.rb", 'w') { |f| f.write "puts \"hello I\'m a #{app} minion\""}
         output.puts "Minion '#{app}' at your service master"
       end
     end

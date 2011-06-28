@@ -7,7 +7,7 @@ end
 
 
 module Minion
-  MINIONS_PATH = File.expand_path("~/minions")
+  MINIONS_PATH = File.expand_path("./minions")
 end
 
 

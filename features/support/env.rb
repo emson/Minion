@@ -6,3 +6,14 @@ require 'cucumber/rspec/doubles'
 
 $LOAD_PATH << File.expand_path('../../../lib', __FILE__)
 require 'minion'
+
+
+# overrde the minions path for testing
+module Minion
+  MINIONS_PATH = File.expand_path("tmp/minions")
+end
+
+# Use the Ruby at_exit hook to clean up the tmp dir
+at_exit do
+  FileUtils.rm_rf('tmp') if File.exists?('tmp')
+end

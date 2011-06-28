@@ -18,29 +18,18 @@ def minion_commands
 end
 
 
+Before do
+  FileUtils.rm_rf(Minion::MINIONS_PATH) if File.exists?(Minion::MINIONS_PATH)
+end
+
+
 Given /^I have not run minion init$/ do
-  # Stub out File.exists? for minions
-  File.stub(:exists?).and_return false
+  File.exists?(Minion::MINIONS_PATH).should be_false
 end
 
 
-Given /^I can now add a minion app$/ do
-  File.stub(:exists?).with(File.expand_path(Minion::MINIONS_PATH)).and_return true
-end
-
-
-Given /^this is the first time using the minion app$/ do
-  FileUtils.should_receive(:mkdir_p).with(File.expand_path("#{Minion::MINIONS_PATH}"))
-end
-
-
-Given /^I expect to see "([^"]*)" created$/ do |dir_path|
-  FileUtils.should_receive(:mkdir_p).with(File.expand_path(dir_path))
-end
-
-
-Given /^I expect to see "([^"]*)" file created$/ do |file_path|
-  File.should_receive(:open).with(File.expand_path("#{file_path}", "w")).and_return true
+Given /^init has been run$/ do
+  minion_commands.send :init
 end
 
 
@@ -62,5 +51,8 @@ Then /^I should see "([^"]*)"$/ do |message|
 end
 
 
-Then /^my expectations should be met$/ do
+Then /^I should to see "([^"]*)" created$/ do |my_path|
+  File.exists?(File.expand_path(my_path)).should be_true
 end
+
+

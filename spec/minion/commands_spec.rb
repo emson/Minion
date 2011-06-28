@@ -7,7 +7,7 @@ module Minion
     
     describe "#init" do
       it "should make a minions directory" do
-        FileUtils.should_receive(:mkdir_p).with("#{Dir.home}/minions")
+        FileUtils.should_receive(:mkdir_p).with(Minion::MINIONS_PATH)
         output.should_receive(:puts).with('The minions have a new home')
         commands.init
       end
@@ -29,7 +29,14 @@ module Minion
       
       it "should create an app subdirectory under the minions directory" do
         File.should_receive(:exists?).with(anything).and_return true
-        FileUtils.should_receive(:mkdir).with("#{Dir.home}/minions/my_app")
+        FileUtils.should_receive(:mkdir_p).with("#{Minion::MINIONS_PATH}/my_app")
+        commands.add "my_app"
+      end
+      
+      it "should create an [app]_main.rb file in the app directory" do
+        File.should_receive(:exists?).with(anything).and_return true
+        FileUtils.should_receive(:mkdir_p).with("#{Minion::MINIONS_PATH}/my_app")
+        File.should_receive(:open).with("#{Minion::MINIONS_PATH}/my_app/my_app_main.rb", 'w')
         commands.add "my_app"
       end
       
