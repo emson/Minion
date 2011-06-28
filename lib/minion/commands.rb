@@ -3,6 +3,8 @@ require 'fileutils'
 module Minion
   class Commands
     
+    attr_reader :output
+    
     def initialize(output=STDOUT)
       @output = output
     end
@@ -20,6 +22,14 @@ module Minion
       end
     end
     
+    def list
+      if init_check?
+        Dir.foreach(Minion::MINIONS_PATH) do |dir|
+          output.puts dir unless File.directory? dir
+        end
+      end
+    end
+    
     private
     
     def init_check?
@@ -28,10 +38,6 @@ module Minion
         return false
       end
       true
-    end
-    
-    def output
-      @output
     end
     
   end

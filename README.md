@@ -13,8 +13,19 @@ Creates a `./minions` directory from where it is executed. This directory will h
 
 
 `minion add my_app_name`<br/>
-Creates a new minion app`in the ./minions/my_app_name` directory. 
+Creates a new minion app`./minions/my_app_name` directory.
 
+
+`minion list`<br/>
+Returns a list of all the minion apps `./minions/` directory.
+
+
+## TODO
+
+* Refactor Commands#add method
+* Start an app
+* Whenever gem - cron job to call app
+* Refactor rspec mocks to create actual files and dirs
 
 
 

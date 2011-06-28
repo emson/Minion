@@ -1,5 +1,4 @@
 Feature: User adds a minion app
-	
 	As a user
 	I want to add a new app
 	So that I handle new functionality

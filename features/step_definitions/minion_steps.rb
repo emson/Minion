@@ -32,6 +32,15 @@ Given /^init has been run$/ do
   minion_commands.send :init
 end
 
+Given /^I have a minion "([^"]*)"$/ do |app|
+  minion_commands.send(:add, app)
+end
+
+Then /^I will see "([^"]*)" in the list$/ do |app|
+  output.messages.should include(app)
+end
+
+
 
 When /^I type "([^"]*)"$/ do |line_items|
   items = line_items.split

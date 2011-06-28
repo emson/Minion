@@ -36,6 +36,11 @@ class MinionAppRunner < Thor
     app.add app_name
   end
   
+  desc "list", "Returns a list of all apps in the minions directory"
+  def list
+    app.list
+  end
+  
 end
 
 # Thor command set up
