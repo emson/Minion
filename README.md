@@ -17,15 +17,15 @@ Creates a new minion app in the `./minions/my_app_name` directory.
 
 
 `minion list`<br/>
-Returns a list of all the minion apps in the `./minions/` directory.
+Returns a list of all the minion apps in the `./minions` directory.
 
 
 ## TODO
 
+* Create minion to read a table
 * Refactor Commands#add method
 * Start an app
 * Whenever gem - cron job to call app
-* Refactor rspec mocks to create actual files and dirs
 
 
 

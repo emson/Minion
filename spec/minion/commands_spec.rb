@@ -1,24 +1,21 @@
 require 'spec_helper'
 
-def clean_up
-  FileUtils.rm_rf("./tmp_rspec") if File.exists? "./tmp_rspec"
-end
-
 module Minion
   
-  MINIONS_PATH = File.expand_path "./tmp_rspec/minions"
-  
   describe Commands do
-    after(:all) do
-      clean_up
-    end
     let(:output) { double('output').as_null_object }
     let(:commands) { Commands.new(output) }
-    let(:minions_path) { Minion::MINIONS_PATH }
+    let(:minions_path) { Minion::Application.minions_root }
+    before :all do
+      Minion::Application.minions_root = File.join(Minion::ROOT, 'tmp_rspec/minions')
+      clean_up_tests
+    end
+    after :all do
+      clean_up_tests
+    end
     
     describe "before #init" do
       it "should show an error message if 'add' is called before 'init'" do
-        clean_up
         output.should_receive(:puts).with("Please run 'minion init' first")
         commands.add "my_app"
       end
@@ -45,12 +42,12 @@ module Minion
       
         it "should create an app subdirectory under the minions directory" do
           commands.add "my_app"
-          File.exists?("#{minions_path}/my_app").should be_true
+          File.exists?(File.join(minions_path, "my_app")).should be_true
         end
       
         it "should create an [app]_main.rb file in the app directory" do
           commands.add "my_app"
-          File.exists?("#{minions_path}/my_app/my_app_main.rb").should be_true
+          File.exists?(File.join(minions_path, "my_app", "my_app_main.rb")).should be_true
         end
       end
     

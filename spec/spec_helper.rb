@@ -8,3 +8,7 @@ Dir.glob("lib/**/*.rb").each do |file|
 end
 
 
+def clean_up_tests
+  path = File.expand_path(File.join(Minion::ROOT, 'tmp_rspec'))
+  FileUtils.rm_rf(path)
+end

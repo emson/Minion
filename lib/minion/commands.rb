@@ -1,4 +1,3 @@
-require 'fileutils'
 
 module Minion
   class Commands
@@ -11,20 +10,20 @@ module Minion
     
     def init
       output.puts "The minions have a new home"
-      FileUtils.mkdir_p(Minion::MINIONS_PATH)
+      Generator.mkdir(Minion::Application.minions_root)
     end
     
     def add(app)
       if init_check?
-        FileUtils.mkdir_p("#{Minion::MINIONS_PATH}/#{app}")
-        File.open("#{Minion::MINIONS_PATH}/#{app}/#{app}_main.rb", 'w') { |f| f.write "puts \"hello I\'m a #{app} minion\""}
+        app_dir = Generator.mkdir(Minion::Application.minions_root, app)
+        File.open(File.join(app_dir, "#{app}_main.rb"), 'w') { |f| f.write "puts \"hello I\'m a #{app} minion\""}
         output.puts "Minion '#{app}' at your service master"
       end
     end
     
     def list
       if init_check?
-        Dir.foreach(Minion::MINIONS_PATH) do |dir|
+        Dir.foreach(Minion::Application.minions_root) do |dir|
           output.puts dir unless File.directory? dir
         end
       end
@@ -33,7 +32,7 @@ module Minion
     private
     
     def init_check?
-      unless File.exists?(Minion::MINIONS_PATH)
+      unless File.exists?(Minion::Application.minions_root)
         output.puts "Please run 'minion init' first"
         return false
       end
