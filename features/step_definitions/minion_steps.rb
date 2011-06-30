@@ -19,12 +19,12 @@ end
 
 
 Before do
-  FileUtils.rm_rf(Minion::MINIONS_PATH) if File.exists?(Minion::MINIONS_PATH)
+  FileUtils.rm_rf(Minion::Application.minions_root) if File.exists?(Minion::Application.minions_root)
 end
 
 
 Given /^I have not run minion init$/ do
-  File.exists?(Minion::MINIONS_PATH).should be_false
+  File.exists?(Minion::Application.minions_root).should be_false
 end
 
 

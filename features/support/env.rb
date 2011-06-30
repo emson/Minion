@@ -9,9 +9,8 @@ require 'minion'
 
 
 # overrde the minions path for testing
-module Minion
-  MINIONS_PATH = File.expand_path("tmp/minions")
-end
+
+Minion::Application.minions_root = File.join(Minion::ROOT, 'tmp/minions')
 
 # Use the Ruby at_exit hook to clean up the tmp dir
 at_exit do
