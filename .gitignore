@@ -4,4 +4,5 @@
 /coverage
 /pkg
 /rdoc
+/minions
 Gemfile.lock

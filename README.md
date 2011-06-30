@@ -19,6 +19,16 @@ Creates a new minion app in the `./minions/my_app_name` directory.
 `minion list`<br/>
 Returns a list of all the minion apps in the `./minions` directory.
 
+##Building new services
+
+To create a new Minion service, such as a Twitter service, create a new twitter directory under the services directory in the Minion code base.
+
+Use Rake to help you do this:
+
+    bundle exec rake minion:service[twitter]
+    
+Now edit this new service **lib/services/twitter** and modify the tests in the **spec/services/twitter** directory.
+
 
 ## TODO
 

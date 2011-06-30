@@ -25,8 +25,17 @@ desc "Generate a Minion Service e.g. rake minion:service[email]"
 namespace :minion do
   task :service, :name do |tsk, args|
     name = args[:name]
-    service_path = Minion::Generator.mkdir(File.dirname(__FILE__), 'services', name)
-    puts "\nGenerating service: \n#{service_path[0]}"
+    paths = []
+    spec_path = Minion::Generator.mkdir(File.dirname(__FILE__), 'spec', 'services', name)
+    service_path = Minion::Generator.mkdir(File.dirname(__FILE__), 'lib', 'services', name)
+    paths << service_path
+    paths << Minion::Generator.touch(service_path, "#{name.downcase}.rb", Minion::Generator.service_content(name))
+    paths << spec_path
+    paths << Minion::Generator.touch(spec_path, "#{name.downcase}_spec.rb", Minion::Generator.service_spec_content(name))
+    puts "\nGenerating service: "
+    paths.each do |p|
+      puts "\t#{p}"
+    end
   end
 end
 
