@@ -7,7 +7,8 @@ module Minion
       def mkdir(path, *dir_names)
         dir_path = File.expand_path(path)
         dir_path = File.join(dir_path, dir_names) if dir_names
-        FileUtils.mkdir_p(dir_path)[0]
+        FileUtils.mkdir_p(dir_path)
+        dir_path
       end
       
       def touch(path, filename, content)
