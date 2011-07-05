@@ -60,6 +60,11 @@ Then /^I should see "([^"]*)"$/ do |message|
 end
 
 
+Then /^I should text containing "([^"]*)"$/ do |messages|
+  output.messages[0].should match(/^The minions have a new home:/)
+end
+
+
 Then /^I should to see "([^"]*)" created$/ do |my_path|
   File.exists?(File.expand_path(my_path)).should be_true
 end

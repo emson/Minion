@@ -9,8 +9,9 @@ module Minion
     end
     
     def init
-      output.puts "The minions have a new home"
-      Generator.mkdir(Minion::Application.minions_root)
+      minions_root = Minion::Application.minions_root
+      Generator.mkdir(minions_root)
+      output.puts "The minions have a new home: #{minions_root}"
     end
     
     def add(app)

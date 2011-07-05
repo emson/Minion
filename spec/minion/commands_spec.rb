@@ -29,7 +29,7 @@ module Minion
     
     describe "after #init" do
       it "should make a minions directory" do
-        output.should_receive(:puts).with('The minions have a new home')
+        output.should_receive(:puts).with("The minions have a new home: #{minions_path}")
         commands.init
         File.exists?(minions_path).should be_true
       end
