@@ -11,13 +11,17 @@ module Minion
     def init
       minions_root = Minion::Application.minions_root
       Generator.mkdir(minions_root)
+      Generator.mkdir(File.join(minions_root, "spec"))
       output.puts "The minions have a new home: #{minions_root}"
     end
     
     def add(app)
       if init_check?
-        app_dir = Generator.mkdir(Minion::Application.minions_root, app)
-        File.open(File.join(app_dir, "#{app}_main.rb"), 'w') { |f| f.write "puts \"hello I\'m a #{app} minion\""}
+        minions_root = Minion::Application.minions_root
+        app_dir = Generator.mkdir(minions_root, app)
+        spec_app_dir = Generator.mkdir(File.join(minions_root, "spec"), app)
+        File.open(File.join(app_dir, "#{app}.rb"), 'w') { |f| f.write Minion::Generator.minion_content(app)}
+        File.open(File.join(spec_app_dir, "#{app}_spec.rb"), 'w') { |f| f.write Minion::Generator.minion_spec_content(app)}
         output.puts "Minion '#{app}' at your service master"
       end
     end

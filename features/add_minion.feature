@@ -13,5 +13,7 @@ Feature: User adds a minion app
     Given init has been run
     When I type "minion add my_app"
     Then I should see "Minion 'my_app' at your service master"
+    And I should to see "tmp/minions/spec/my_app" created
+    And I should to see "tmp/minions/spec/my_app/my_app_spec.rb" created
     And I should to see "tmp/minions/my_app" created
-    And I should to see "tmp/minions/my_app/my_app_main.rb" created
+    And I should to see "tmp/minions/my_app/my_app.rb" created

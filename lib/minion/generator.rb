@@ -21,6 +21,33 @@ module Minion
       end
       
       
+      def minion_content(name)
+"
+module Minion
+  class #{name.camelize}
+    # TODO add methods
+  end
+end
+
+"
+      end
+      
+      
+      def minion_spec_content(name)
+"require 'spec_helper'
+
+module Minion
+  describe #{name.camelize} do
+    it \"should do something\" do
+      pending \"Please implement spec: spec/#{name}/#{name}_spec.rb\"
+    end
+  end
+end
+
+"
+      end
+      
+      
       def service_content(name)
 "
 module Services
@@ -39,7 +66,7 @@ end
 module Services
   describe #{name.camelize} do
     it \"should do something\" do
-      raise \"Please implement spec: spec/services/#{name}/#{name}_spec.rb\"
+      pending \"Please implement spec: spec/services/#{name}/#{name}_spec.rb\"
     end
   end
 end

@@ -34,6 +34,11 @@ module Minion
         File.exists?(minions_path).should be_true
       end
       
+      it "should make a minions/spec directory" do
+        commands.init
+        File.exists?(File.join(minions_path, "spec")).should be_true
+      end
+      
       describe "then #add" do
         it "should display a created message" do
           output.should_receive(:puts).with("Minion 'my_app' at your service master")
@@ -45,10 +50,17 @@ module Minion
           File.exists?(File.join(minions_path, "my_app")).should be_true
         end
       
-        it "should create an [app]_main.rb file in the app directory" do
+        it "should create an [app].rb file in the app directory" do
           commands.add "my_app"
-          File.exists?(File.join(minions_path, "my_app", "my_app_main.rb")).should be_true
+          File.exists?(File.join(minions_path, "my_app", "my_app.rb")).should be_true
         end
+      
+        it "should create an [app]_spec.rb file in the minions/spec directory" do
+          commands.add "my_app"
+          File.exists?(File.join(minions_path, "spec", "my_app", "my_app_spec.rb")).should be_true
+        end
+        
+        
       end
     
       describe "then #list" do

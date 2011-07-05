@@ -10,3 +10,4 @@ Feature: User initiates the minion app
     When I type "minion init"
     Then I should text containing "The minions have a new home:"
 		And I should to see "tmp/minions" created
+		And I should to see "tmp/minions/spec" created
